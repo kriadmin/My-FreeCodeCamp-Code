@@ -45,3 +45,20 @@ function sumFibs(num) {
 }
 
 sumFibs(75025);
+// A more advanced solution with no LOOPS
+function sumFibs(num) {
+  // Checks the number of fibonacci numbers to generate using the function given here:-
+  //https://stackoverflow.com/a/7557366/8641677
+  var n = Math.ceil(Math.log(num * Math.sqrt(5) + 1/2) / Math.log((Math.sqrt(5)+1)/2))
+  //The value of Phi(the golden ratio) https://en.wikipedia.org/wiki/Phi
+  var Phi = (Math.sqrt(5)+1)/2;
+  //Value of 1/Phi which is also equal to Phi - 1
+  var phi = Phi - 1;
+  //Generate an array of length n and use map and the formula give at
+  //http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibFormula.html
+  //to generate an array containing fibonacci numbers till num. Also use filter to get only odd numbers
+  var arr = Array.from({length:n}).map((x,i) => Math.round(((Phi ** i) - ((-phi) ** i))/Math.sqrt(5))).filter(x => x%2 == 1);
+  //Use reduce to add all the elements in the array
+  arr = arr.reduce((a,b) => a+b);
+  return arr
+}
